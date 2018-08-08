@@ -102,7 +102,9 @@ class ChinaWeatherSpider(object):
                     weather_map['area'] = list['area']  # 获取区域的列表
                     weather_map['areacode'] = list['areacode']  # 获取区域的代码
                     # 字符串转时间格式
-                    t = datetime.strptime(list['datetime'], '%Y%m%d%H%M') + timedelta(days = time_count)
+                    t = datetime.strptime(
+                        list['datetime'],
+                        '%Y%m%d%H%M') + timedelta(days=time_count)
                     # 时间转字符串,  获取区域的时间
                     weather_map['datetime'] = t.strftime('%Y%m%d%H%M')
                     weather_map['climate'] = clim.find(
