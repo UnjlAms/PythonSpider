@@ -11916,7 +11916,7 @@ function() {
     }
     //   window.asrsea = d 加密函数
     function d(d, e, f, g) {
-        window.console.info(d);
+       // window.console.info(d);
         var h = {},
         i = a(16);
         return h.encText = b(d, g),
@@ -12036,7 +12036,7 @@ function() {
             Z7S = Z7S.replace("api", "weapi");
             e6c.method = "post";
             delete e6c.query;
-            // window.console.info(i6c)
+            window.console.info(i6c)
             // window.console.info("brk8c:"+brk8c(["流泪", "强"]))
             // window.console.info(brk8c(Xi2x.md))
             // window.console.info(brk8c(["爱心", "女孩", "惊恐", "大笑"]))

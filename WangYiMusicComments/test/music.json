@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "id": 530469,
+            "url": "http://m10.music.126.net/20180812014814/8d6e5eee542cf83b819aff4894424686/ymusic/3503/ed24/86bc/57c476df078c66bfe5ba154e577ab73b.mp3",
+            "br": 128000,
+            "size": 2147100,
+            "md5": "57c476df078c66bfe5ba154e577ab73b",
+            "code": 200,
+            "expi": 1200,
+            "type": "mp3",
+            "gain": 0.0318,
+            "fee": 0,
+            "uf": null,
+            "payed": 0,
+            "flag": 0,
+            "canExtend": false
+        }
+    ],
+    "code": 200
+}

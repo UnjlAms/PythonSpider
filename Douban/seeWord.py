@@ -1,4 +1,5 @@
 import numpy
+import jieba
 from PIL import Image
 from comments import DoubanComments
 import matplotlib.pyplot as plt
@@ -20,7 +21,7 @@ def wordcloud_comments():
         mask=img,
         # 最大号字体
         max_font_size=100,
-    ).generate(text)
+    ).generate(' '.join(jieba.cut(text, HMM=True)))
     # 从背景图片生成颜色值
     # image_colors = ImageColorGenerator(img)
     # 重新配对颜色

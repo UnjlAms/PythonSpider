@@ -2,6 +2,7 @@
 Picture/
 
 *.pyc
+*.http
 
 task.txt
 

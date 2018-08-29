@@ -1,9 +1,8 @@
-
-'''
-
-@author UnjlAms
-
-'''
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2018-08-12 17:31:43
+# @Author  : UnjlAms
+# @Version : 1.0.0
 
 import json
 import queue
@@ -38,6 +37,7 @@ class MusicComments:
             'Connection': 'keep-alive',
             'Host': 'music.163.com',
             # 'Content-Type': 'application/x-www-form-urlencoded',
+            # 'cookie': "**",
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.32 Safari/537.36'
         }
 
@@ -111,19 +111,22 @@ class MusicComments:
         url = 'https://music.163.com/weapi/v1/resource/comments/R_SO_4_{0}?csrf_token='.format(
             song_id)
         page_acount = self.get_comments_count(song_id) // 20 + 2
-        print('共',page_acount,'页')
+        total = 'true'
+        print('共', page_acount, '页')
         for page in range(1, page_acount):
             print('-----------第{0}页---------------'.format(page))
-            if page == 1:
-                text = '{"rid":"R_SO_4_%s","offset":"%d","total":"%s","limit":"20","csrf_token":""}' % (
-                    song_id, (page - 1) * 20, 'true')
-            else:
-                text = '{"rid":"R_SO_4_%s","offset":"%d","total":"%s","limit":"20","csrf_token":""}' % (
-                    song_id, (page - 1) * 20, 'false')
+            if page != 1:
+                total = 'false'
+            text = '{"rid":"R_SO_4_%s","offset":"%d","total":"%s","limit":"20","csrf_token":""}' % (
+                song_id, (page - 1) * 20, total)
             json_data = json.loads(self.get_json(text, url))
             for item in json_data['comments']:
-                cmt = item['content']
-                comments_list.append(cmt+'\r\n')
+                comments_list.append(item['content'] + '\r\n')
+                if item['beReplied'] != []:
+                    for it in item['beReplied']:
+                        cmt = it['content']
+                        if cmt != None:
+                            comments_list.append(cmt + '\r\n')
         return ''.join(comments_list)
 
     # 存入文本文件
@@ -133,10 +136,12 @@ class MusicComments:
 
     # 开始程序
     def start_programe(self):
-        song_id = '536502758'
+        song_id = '784555'
         song_name, song_singer = self.get_song_info(song_id)
         self.save_txt(song_name+"-"+song_singer, self.get_comments(song_id))
 
 
 if __name__ == '__main__':
     MusicComments().start_programe()
+    # 网易云歌曲
+    # print(MusicComments().get_json(text='{ids: \"[1299570603]\", br: 128000, csrf_token: \"\"}',url='http://music.163.com/weapi/song/enhance/player/url?csrf_token='))
