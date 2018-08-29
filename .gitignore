@@ -3,6 +3,7 @@ Picture/
 
 *.pyc
 *.http
+*.https
 
 task.txt
 
