@@ -7,8 +7,6 @@
 
 import requests
 
-import os
-
 url = "http://music.163.com/weapi/song/enhance/player/url?csrf_token="
 
 

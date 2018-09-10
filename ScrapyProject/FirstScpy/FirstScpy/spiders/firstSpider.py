@@ -28,4 +28,4 @@ class FirstspiderSpider(scrapy.Spider):
             fsit['count'] = count[0][1:-1:]
             yield fsit
             # list.append(fsit)
-        # return list
+    # return list
