@@ -1,0 +1,19 @@
+
+
+
+https://fe-api.zhaopin.com/c/i/sou?start=0&pageSize=100&cityId=736&industry=10100&kw=java&kt=3
+
+start   开始的位置
+
+pageSize  页面的大小 默认是60  , 上限是100
+
+cityID   城市的id
+
+industry   职业号的id
+
+kw   搜索的关键字
+
+kt  使用kw 时 必带的关键字
+
+
+
