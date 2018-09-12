@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 
 import scrapy
 
 from Jobs.Items.cmpItems import CmpItem
+
+from scrapy.utils.project import get_project_settings
 
 # https://fe-api.zhaopin.com/c/i/sou?start=100&pageSize=60&cityId=489&kt=3
 
@@ -12,6 +15,8 @@ class ZlzpcmpspiderSpider(scrapy.Spider):
     name = 'zlzpCmpSpider'
     allowed_domains = ['fe-api.zhaopin.com']
     start = 0
+    if os.path.exists('../data/Zlzp.db'):
+        start = int(get_project_settings().get('ZLZPCMPSPIDER_START'))
     num_found = 0
     start_urls = [
         'https://fe-api.zhaopin.com/c/i/sou?start=' +
@@ -24,7 +29,8 @@ class ZlzpcmpspiderSpider(scrapy.Spider):
     }
 
     def parse(self, response):
-        yield scrapy.Request(url=response.url, callback=self.get_all_numfound)
+        print('start的值为----------', self.start)
+        yield scrapy.Request(url=response.url, callback=self.get_all_numfound, dont_filter=True)
 
     # 获取职位的总数
     def get_all_numfound(self, response):
@@ -85,4 +91,5 @@ class ZlzpcmpspiderSpider(scrapy.Spider):
                 yield cpany
             self.start = self.start + 100
             print('页面的数:', self.start)
-            yield scrapy.Request(url='https://fe-api.zhaopin.com/c/i/sou?start=' + str(self.start)+'&pageSize=100&cityId=489&kt=3', callback=self.get_company_data, dont_filter=True)
+            yield scrapy.Request(url='https://fe-api.zhaopin.com/c/i/sou?start=' + str(self.start) + '&pageSize=100&cityId=489&kt=3', callback=self.get_company_data,
+                                 dont_filter=True)

@@ -21,14 +21,22 @@ EDIRECT_ENABLED = False
 COOKIES_ENABLED = False
 
 
+# 断点重爬取
+# JOBDIR = '../data/Log'
+
+# --------断点重爬-------------
+ZLZPCMPSPIDER_START ='3000'
+
 # -----------SQlite 数据库位置---------------
 SQLITE_DATABASE_PATH = '../data/Zlzp.db'
 
 # SQLITE_INDUSTRY_PATH = '../data/industry.db'
 
+# ----------------日志---------------
+LOG_FILE = 'log_file.log'
+LOG_LEVEL = 'INFO'
 
-# UserAgen
-
+# UserAgent
 USER_AGENTS = [
     'AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; zh-cn)',
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.106 Safari/537.36',

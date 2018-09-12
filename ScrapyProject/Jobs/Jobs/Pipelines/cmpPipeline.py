@@ -102,12 +102,26 @@ class CompanyPipeline(object):
             )
             values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )'''
         self.connect.execute(insert_sql, list)
-        print('数据库插入成功')
+        # print('数据库插入成功')
 
     def close_spider(self, spider):
+        self.sub_file(str(spider.start))
         self.connect.commit()
         self.connect.commit()
         print('数据库已关闭')
+
+    # 断点爬取
+    def sub_file(self,number):
+        data = ''
+        number = "\'"+number+"\'\r"
+        with open('../settings.py', 'r', encoding='UTF-8') as r:
+            for line in r.readlines():
+                if 'ZLZPCMPSPIDER_START' in line:
+                    start = line.split('=')[1]
+                    line = line.replace(start, number)
+                data += line
+        with open('../settings.py', 'w', encoding='UTF-8') as f:
+            f.write(data)
 
     @classmethod
     def from_crawler(cls, crawler):
