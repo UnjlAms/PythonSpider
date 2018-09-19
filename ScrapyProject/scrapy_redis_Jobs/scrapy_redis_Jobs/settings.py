@@ -15,33 +15,29 @@ SPIDER_MODULES = ['scrapy_redis_Jobs.spiders']
 NEWSPIDER_MODULE = 'scrapy_redis_Jobs.spiders'
 
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapy_redis_Jobs (+http://www.yourdomain.com)'
-
-# Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
-
-
-# --------断点重爬-------------
-# ZLZPCMPSPIDER_START = '12000'
-
-
-# -----------SQlite 数据库位置---------------
-# SQLITE_DATABASE_PATH = '../data/Zlzp.db'
-
-
 # ---------------Redis 分布式----------------------
+# scrapy-redis 的调度器
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# scrapy-redis 的指纹过滤器
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# scrapy-redis 中 redis 爬取的优先级队列
 SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderPriorityQueue"
+# 记录爬虫爬取的位置, 以便继续爬取
 SCHEDULER_PERSIST = True
 # SCHEDULER_FLUSH_ON_START = True
 
 # SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderQueue'
-# REDIS_URL = 'redis://39.106.155.194:6379'
-REDIS_HOST = '127.0.0.1'  # 也可以根据情况改成 localhost
-REDIS_PORT = '6379'
-# REDIS_PASSWORD = ''
+
+# -------------------redis 数据库配置---------------------
+# redis 远程的URL
+# REDIS_URL = ''
+REDIS_HOST = '127.0.0.1'  # host 地址
+REDIS_PORT = '6379'  # 端口号
+REDIS_PARAMS = {
+    # 'password': '',  # 密码
+    'db': 1  # 指定数据库
+}
+
 
 # ----------------日志---------------
 # LOG_FILE = 'log_file.log'
@@ -107,13 +103,13 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# -------------------scrapy-redis pipeline文件内容--------------
 ITEM_PIPELINES = {
     # 'scrapy_redis_Jobs.pipelines.ScrapyRedisJobsPipeline': 300,
+    # 注意如果使用本地的piplines 文件, 一定要比该文件的优先级要小
     'scrapy_redis.pipelines.RedisPipeline': 400,
 }
 
-
-# DOWNLOAD_DELAY = 1.5
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
