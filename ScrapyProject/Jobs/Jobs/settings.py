@@ -25,10 +25,20 @@ COOKIES_ENABLED = False
 # JOBDIR = '../data/Log'
 
 # --------断点重爬-------------
-ZLZPCMPSPIDER_START ='3000'
+ZLZPCMPSPIDER_START = '3000'
+
 
 # -----------SQlite 数据库位置---------------
 SQLITE_DATABASE_PATH = '../data/Zlzp.db'
+
+
+# ---------------Redis 分布式----------------------
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderQueue'
+# # REDIS_URL = 'redis://39.106.155.194:6379'
+# SCHEDULER_PERSIST = True
+
 
 # SQLITE_INDUSTRY_PATH = '../data/industry.db'
 

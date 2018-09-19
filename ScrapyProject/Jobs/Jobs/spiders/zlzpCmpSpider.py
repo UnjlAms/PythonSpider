@@ -3,10 +3,9 @@ import json
 import os
 
 import scrapy
+from scrapy.utils.project import get_project_settings
 
 from Jobs.Items.cmpItems import CmpItem
-
-from scrapy.utils.project import get_project_settings
 
 # https://fe-api.zhaopin.com/c/i/sou?start=100&pageSize=60&cityId=489&kt=3
 
@@ -91,5 +90,4 @@ class ZlzpcmpspiderSpider(scrapy.Spider):
                 yield cpany
             self.start = self.start + 100
             print('页面的数:', self.start)
-            yield scrapy.Request(url='https://fe-api.zhaopin.com/c/i/sou?start=' + str(self.start) + '&pageSize=100&cityId=489&kt=3', callback=self.get_company_data,
-                                 dont_filter=True)
+            yield scrapy.Request(url='https://fe-api.zhaopin.com/c/i/sou?start=' + str(self.start) + '&pageSize=100&cityId=489&kt=3', callback=self.get_company_data, dont_filter=True)
